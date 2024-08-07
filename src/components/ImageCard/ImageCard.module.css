@@ -1,7 +1,6 @@
 .item {
-  width: calc((100% - 33px) / 4);
+  width: calc((100% - (4 * 8px)) / 4);
   height: 220px;
   background-color: rgb(255, 223, 205);
   border: 1px solid black;
-
 }
