@@ -1,0 +1,7 @@
+.item {
+  width: calc((100% - 32px) / 4);
+  height: 220px;
+  background-color: rgb(255, 223, 205);
+  border: 1px solid black;
+
+}
