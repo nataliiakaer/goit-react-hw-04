@@ -16,12 +16,12 @@ const App = () => {
   useEffect(() => {
     const fetchImage = async () => {
       setLoading(true);
-      setError(true)
+      setError(true);
       const { data } = await axios.get(
-        `https://api.unsplash.com/photos/?cient_id=${ACCESS_KEY}`
+        `https://api.unsplash.com/search/photos/?client_id=${ACCESS_KEY}&per_page=12&query=office`
       );
-      console.log(data);
-      setImages(data);
+      console.log(data.results);
+      setImages(data.results);
       setLoading(false);
     };
 
@@ -34,7 +34,7 @@ const App = () => {
       {loading && <Loader />}
       {error && <ErrorMessage />}
       {Array.isArray(images) && <ImageGallery images={images} />}
-      <LoadMoreBtn />
+      {Array.isArray(images) && <LoadMoreBtn />}
     </>
   );
 };
