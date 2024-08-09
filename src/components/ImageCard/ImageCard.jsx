@@ -1,14 +1,12 @@
 import css from "./ImageCard.module.css";
 
-const ImageCard = () => {
+const ImageCard = ({ image }) => {
   return (
-    <li className={css.item}>
-      <div className={css.containerImg}>
-        <a>
-          <img src="" alt="" />
-        </a>
-      </div>
-    </li>
+    <div className={css.containerImg}>
+      <a>
+        <img src={image.urls.small} alt={image.alt_description} />
+      </a>
+    </div>
   );
 };
 
