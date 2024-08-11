@@ -1,42 +1,42 @@
+import { Field, Form, Formik } from "formik";
 import css from "./SearchBar.module.css";
 import { CiSearch } from "react-icons/ci";
+import * as Yup from "yup";
+import { ErrorMessage } from "formik";
 
-const SearchBar = () => {
-    
-    const handleSubmit = (evt) => {
-      evt.preventDefault();
-      // const form = evt;
-      // console.log(form);
-      // const topic = form.elements.topic.value;
-      // console.log(topic);
-      
-      // // Якщо текстове поле порожнє, виводимо повідомлення 
-      // // і припиняємо виконання функції.
-      // if(form.elements.topic.value.trim() === "") {
-      //   alert("Please enter search term!")
-      //   return;
-      // }
-  
-      // // У протилежному випадку викликаємо пропс 
-      // // і передаємо йому значення поля
-      // onSearch(topic);
-      // form.reset();
+
+const INITIAL_VALUES = {
+  search: ""
+}
+
+const SearchValidationSchema = Yup.object().shape({
+  search: Yup.string().min(2, "Too short!").max(100, "Too long!").required("Required")
+})
+
+const SearchBar = ({onSearch}) => {
+    const handleSubmit = (values) => {
+      onSearch(values.search);
+      console.log(values.search);
     };
 
   return (
     <header className={css.header}>
-      <form className={css.form} onSubmit={handleSubmit}>
-        <input
-        className={css.input}
-        type="text"
-        // autocomplete="off"
-        // autofocus
-        placeholder="Search images and photos"
-        />
-        <button className={css.btn} type="submit">
-          <CiSearch />
-        </button>
-      </form>
+    <Formik initialValues={INITIAL_VALUES} onSubmit={handleSubmit} validationSchema={SearchValidationSchema}> 
+      <Form className={css.form}>
+        <div className={css.container}> 
+          <Field 
+          className={css.input}
+          type="text"
+          name="search"
+          placeholder="Search images and photos"
+          />
+          <button className={css.btn} type="submit">
+            <CiSearch />
+          </button>
+        </div>
+        <ErrorMessage className={css.error} name="search" component="span" />
+      </Form>
+      </Formik>
     </header>
   );
 };

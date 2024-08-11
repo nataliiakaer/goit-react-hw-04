@@ -4,17 +4,22 @@ import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
 import SearchBar from "./SearchBar/SearchBar";
 import Loader from "./Loader/Loader";
 import ErrorMessage from "./ErrorMessage/ErrorMessage";
-import { fetchImagesWithSearch } from "../images_api";
+import { fetchImagesWithSearchValue } from "../images_api";
+import css from "./App.module.css";
 
 const App = () => {
   const [images, setImages] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
+  const [searchValue, setSearchValue] = useState(null);
+
   useEffect(() => {
+    if (searchValue === null) return;
+
     async function fetchImage() {
       try {
         setLoading(true);
-        const data = await fetchImagesWithSearch("office");
+        const data = await fetchImagesWithSearchValue(searchValue);
         setImages(data);
       }
       catch (error) {setError(true);}
@@ -24,15 +29,21 @@ const App = () => {
     }
 
     fetchImage();
-  }, []);
+  }, [searchValue]);
+
+  const onSearch = (event) => {
+    setSearchValue(event);
+  };
+
 
   return (
     <>
-      <SearchBar />
+      <SearchBar onSearch={onSearch}/>
       {loading && <Loader />}
-      {error && <ErrorMessage />}
+      {error !== null && <ErrorMessage />}
       {Array.isArray(images) && <ImageGallery images={images} />}
-      {Array.isArray(images) && <LoadMoreBtn />}
+      {Array.isArray(images) && images.length > 0 && <LoadMoreBtn />}
+      {Array.isArray(images) && images.length === 0 && <p className={css.noImageTitle}>There are no images. Please change your value in the field.</p>}
     </>
   );
 };
