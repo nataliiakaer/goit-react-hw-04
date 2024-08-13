@@ -2,12 +2,10 @@ import css from "./ImageCard.module.css";
 
 const ImageCard = ({ image, openModal, setCurrentImg }) => {
   
-
-  const handleClick  = () => {
+  const handleClick = () => {
     setCurrentImg({ url: image.urls.regular, alt: image.alt_description });
-    openModal()
+    openModal();
   };
-
 
   return (
     <>
