@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import css from "./ImageModal.module.css";
 
-const ImageModal = ({ closeModal }) => {
+const ImageModal = ({ currentImg, closeModal }) => {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.code === "Escape") {
@@ -26,8 +26,7 @@ const ImageModal = ({ closeModal }) => {
   return (
     <div className={css.backdrop} onClick={handleBackDropClick}>
       <div className={css.modal}>
-        <img src="" alt="" />
-        <p>This is modal</p>
+        <img src={currentImg.url} alt={currentImg.alt} />
       </div>
     </div>
   );

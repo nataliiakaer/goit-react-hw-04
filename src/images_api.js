@@ -7,5 +7,5 @@ export const fetchImagesWithSearchValue = async (search, loadMore) => {
   const { data } = await axios.get(
     `/search/photos/?client_id=${ACCESS_KEY_API}&per_page=12&query=${search}&page=${loadMore}`
   );
-  return data.results;
+  return data;
 };

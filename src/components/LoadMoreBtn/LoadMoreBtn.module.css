@@ -9,5 +9,6 @@
   border: none;
   cursor: pointer;
   border-radius: 4px;
-  color: gray
+  color: gray;
+  margin-bottom: 10px;
 }

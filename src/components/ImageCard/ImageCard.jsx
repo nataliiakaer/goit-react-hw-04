@@ -1,10 +1,18 @@
 import css from "./ImageCard.module.css";
 
-const ImageCard = ({ image, openModal }) => {
+const ImageCard = ({ image, openModal, setCurrentImg }) => {
+  
+
+  const handleClick  = () => {
+    setCurrentImg({ url: image.urls.regular, alt: image.alt_description });
+    openModal()
+  };
+
+
   return (
     <>
       <div className={css.containerImg}>
-        <a onClick={() => openModal(image.id)}>
+        <a onClick={handleClick}>
           <img
             className={css.img}
             src={image.urls.small}

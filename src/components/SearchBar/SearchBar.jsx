@@ -12,7 +12,7 @@ const SearchValidationSchema = Yup.object().shape({
   search: Yup.string()
     .min(2, "Too short!")
     .max(100, "Too long!")
-    .required("Required"),
+    .required("Required field for filling in"),
 });
 
 const SearchBar = ({ onSearch }) => {
